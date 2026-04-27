@@ -36,6 +36,11 @@ jobs:
       - name: Install Poetry
         run: pip install poetry
 
+      - name: Refresh lockfile for this platform
+        # macOS-locked pyqt5-qt5 versions don't always have Windows wheels and
+        # vice versa, so regenerate per-runner before installing.
+        run: poetry lock
+
       - name: Install dependencies
         run: poetry install --no-root
 
