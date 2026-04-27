@@ -33,19 +33,13 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install Poetry
-        run: pip install poetry
-
-      - name: Refresh lockfile for this platform
-        # macOS-locked pyqt5-qt5 versions don't always have Windows wheels and
-        # vice versa, so regenerate per-runner before installing.
-        run: poetry lock
-
       - name: Install dependencies
-        run: poetry install --no-root
+        # Skip poetry here: PyQt5-Qt5 wheel availability differs per platform,
+        # and pip resolves the best match for the current runner.
+        run: pip install "PyQt5>=5.15,<5.16" "Pillow>=10,<11" "pillow-avif-plugin>=1.4,<2" "pyinstaller>=6,<7"
 
       - name: Build with PyInstaller
-        run: poetry run pyinstaller TheFloor.spec --noconfirm
+        run: pyinstaller TheFloor.spec --noconfirm
 
       - name: Package
         shell: bash
