@@ -7,7 +7,10 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = ">=3.11,<3.14"
-PyQt5 = "^5.15"
+PyQt5 = "5.15.11"
+# pyqt5-qt5 5.15.18 only ships macOS arm64 wheels — pin to 5.15.11 which has
+# wheels for Windows, macOS x86_64/arm64 and manylinux.
+PyQt5-Qt5 = "5.15.11"
 Pillow = "^10.0"
 pillow-avif-plugin = "^1.4"
 
